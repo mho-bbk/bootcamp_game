@@ -22,7 +22,7 @@ public class Treasure {
 	}
 	
 	public boolean checkWin(Player p) {
-		return false;
+		return this.getPosition().equals(p.getCurrentPosition());
 	}
 	
 	public String compareDistanceFromPrevious(Player p) {
