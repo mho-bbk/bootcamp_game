@@ -5,12 +5,16 @@ import java.util.Scanner;
 public class Run {
 
 	Scanner inp = new Scanner(System.in);
-	
-	final String winMessage = "You've won the game!";
-	
+
+    Enemy enemy;
     ArrayList<String> enemies = new ArrayList<>();
     int numOfEnemies;
     
+   
+	final String winMessage = "You've won the game!";
+	final String loseMessage = "My G, you've bumped into a monster...and been eaten! Game over.";
+	
+
     public Run() {
     	
     	boolean finished = false;
@@ -19,7 +23,6 @@ public class Run {
         String userGridSize = getInput("Enter the grid size: ");
         int gridSizeAsInt = 0;
         
-        //0 grid size causes IllegalArgumentException
         try {
         	gridSizeAsInt = Integer.parseInt(userGridSize);
         } catch (Exception e) {
@@ -33,7 +36,9 @@ public class Run {
 	        TREASURE = new Treasure(gridSizeAsInt);
 	        //TODO
 	        // GENERATE ENEMIES
-	        numOfEnemies = Integer.parseInt(userGridSize)*2; // E.G. grid size is 5x5 (= 25) so number of enemies = 10
+	        enemy = new Enemy("Gerard", gridSizeAsInt);
+	        newGrid.setPosition(enemy);
+//	        numOfEnemies = Integer.parseInt(userGridSize)*2; // E.G. grid size is 5x5 (= 25) so number of enemies = 10
 	        
 	        // ADD PLAYER
 	        String playerName = getInput("What's your name?: ");
@@ -48,9 +53,14 @@ public class Run {
 	        if(TREASURE.checkWin(p)) {
 	        	System.out.println(winMessage);
 	        	finished = true;
+	        } else if (enemy.getCurrentPosition().equals(p.getCurrentPosition())) {
+	        	// CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS ENEMY
+	        	System.out.println(loseMessage);
+	        	finished = true;
 	        } else {
 	        	System.out.println("The treasure is somewhere...");
 	        }
+	        
 	        
 	        // BEGIN PLAYER MOVES
 	        while(!finished) {
@@ -70,11 +80,13 @@ public class Run {
 		        newGrid.printGrid();
 		        
 		        //Check treasure
-		        if(TREASURE.checkWin(p)) {
-		        	System.out.println(winMessage);
-		        	finished = true;
-		        } else {
-		        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
+		        if(!move.toUpperCase().equals("X")) {
+			        if(TREASURE.checkWin(p)) {
+			        	System.out.println(winMessage);
+			        	finished = true;
+			        } else {
+			        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
+			        }
 		        }
 	        }
 	        

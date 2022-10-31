@@ -1,7 +1,7 @@
 
 public class Enemy extends Player {
 	private String message;
-	private char symbol = 'X';
+	private char symbol = 'E';
 
 	public Enemy(String name, int gridSize) {
 		super(name, gridSize);
@@ -21,5 +21,9 @@ public class Enemy extends Player {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	
+	public char getSymbol() {
+		   return this.symbol;
 	}
 }
