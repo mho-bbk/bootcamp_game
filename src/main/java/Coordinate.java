@@ -50,6 +50,22 @@ public class Coordinate {
 	public String toString() {
 		return "(" + getRow() + ", " + getCol() + ")";
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		
+		Coordinate coord = (Coordinate) o;
+		
+		return this.getRow() == coord.getRow() &&
+				this.getCol() == coord.getCol();
+	}
 
 	
 	//TODO - make sure the player doesn't land on same square as treasure at start

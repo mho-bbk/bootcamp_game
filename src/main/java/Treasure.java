@@ -21,6 +21,10 @@ public class Treasure {
 		return this.pos;
 	}
 	
+	public boolean checkWin(Player p) {
+		return false;
+	}
+	
 	public String compareDistanceFromPrevious(Player p) {
 		
 //		int xCurrentDistance = this.pos.getCol() - p.getCurrentPosition().getCol();
