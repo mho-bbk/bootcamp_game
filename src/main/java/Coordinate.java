@@ -66,8 +66,4 @@ public class Coordinate {
 		return this.getRow() == coord.getRow() &&
 				this.getCol() == coord.getCol();
 	}
-
-	
-	//TODO - make sure the player doesn't land on same square as treasure at start
-	//TODO - make sure the player doesn't land on same square as enemy at start
 }
