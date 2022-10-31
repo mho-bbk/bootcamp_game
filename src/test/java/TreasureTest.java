@@ -1,23 +1,24 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 class TreasureTest {
+	
 
 	@Test
-	void testDistanceFrom() {
-		int gridSize = 4;
-//		GridController gc = new GridController(gridSize);
+	void testCompareDistanceFromPrevious() {
+		Treasure t = Mockito.mock(Treasure.class);
+		Player p = Mockito.mock(Player.class);
 		
-		Treasure t = new Treasure(gridSize);
-		System.out.println("Test gold: " + t.getGold());
-		System.out.println("Treasure position: " + t.getPosition());
+		Mockito.when(t.getPosition()).thenReturn(new Coordinate(2,2));
 		
-		//TODO - mock player coordinates - current & previous
-		Player p = new Player("Donald", gridSize);
-		p.getCurrentPosition().printCoordinate();
-
-//		gc.printGrid();
+		Mockito.when(p.getCurrentPosition()).thenReturn(new Coordinate(0,1));
+		Mockito.when(p.getPreviousPosition()).thenReturn(new Coordinate(1,1));
+		
+		Mockito.when(t.compareDistanceFromPrevious(p)).thenCallRealMethod();
+		
+		assertEquals("Getting colder!", t.compareDistanceFromPrevious(p));
 		
 		System.out.println(t.compareDistanceFromPrevious(p));
 	}

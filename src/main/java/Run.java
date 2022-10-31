@@ -7,6 +7,7 @@ public class Run {
 	Scanner inp = new Scanner(System.in);
 	
 	final Treasure TREASURE;
+	final String winMessage = "You've won the game!";
 	
     ArrayList<String> enemies = new ArrayList<>();
     int numOfEnemies;
@@ -32,6 +33,12 @@ public class Run {
         System.out.println("Grid of size "+userGridSize+" x "+userGridSize+" created.");
         newGrid.printGrid();
         
+        if(TREASURE.checkWin(p)) {
+        	System.out.println(winMessage);
+        } else {
+        	System.out.println("The treasure is somewhere...");
+        }
+        
         while(!finished) {
 //	        System.out.println("Inside loop");
 	        
@@ -47,9 +54,17 @@ public class Run {
 	        
 	        newGrid.setPosition(p); 
 	        newGrid.printGrid();
+	        
+	        //Check treasure
+	        if(TREASURE.checkWin(p)) {
+	        	System.out.println(winMessage);
+	        	finished = true;
+	        } else {
+	        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
+	        }
         }
         
-        System.out.println(p.getName() + " has exited the game.");
+        System.out.println(p.getName() + " has finished the game.");
       
        
         //TODO - implement below
