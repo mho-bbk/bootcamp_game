@@ -21,7 +21,6 @@ public class Run {
     Enemy enemy;
     ArrayList<String> enemies = new ArrayList<>();
     int numOfEnemies;
-    
    
 	final String winMessage = "You've won the game!";
 	final String loseMessage = "My G, you've bumped into a monster...and been eaten! Game over.";
@@ -50,7 +49,7 @@ public class Run {
 	        //TODO
 	        // GENERATE ENEMIES
 	        enemy = new Enemy("Gerard", gridSizeAsInt);
-	        newGrid.setPosition(enemy);
+//	        TODO - doesn't work anymore after Enemy refactored to resemble Treasure - newGrid.setPosition(enemy);
 //	        numOfEnemies = Integer.parseInt(userGridSize)*2; // E.G. grid size is 5x5 (= 25) so number of enemies = 10
 	        
 	        // ADD PLAYER
@@ -67,7 +66,7 @@ public class Run {
 	        	System.out.println(winMessage);
 	        	winGame(p.getName());
 	        	finished = true;
-	        } else if (enemy.getCurrentPosition().equals(p.getCurrentPosition())) {
+	        } else if (enemy.checkWin(p)) {
 	        	// CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS ENEMY
 	        	System.out.println(loseMessage);
 	        	finished = true;
@@ -102,6 +101,10 @@ public class Run {
 			        if(TREASURE.checkWin(p)) {
 			        	System.out.println(winMessage);
 			        	winGame(p.getName());
+			        	finished = true;
+			        } else if (enemy.checkWin(p)) {
+			        	// CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS ENEMY
+			        	System.out.println(loseMessage);
 			        	finished = true;
 			        } else {
 			        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
