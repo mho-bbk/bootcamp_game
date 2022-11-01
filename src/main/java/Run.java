@@ -110,7 +110,6 @@ public class Run {
 			        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
 			        }
 			        
-			        //TODO - check enemy
 		        }
 	        }
 	        
