@@ -74,5 +74,10 @@ class PlayerTest {
 		
 		gc.printGrid();
 	}
+	
+	@Test
+	void fakeTestForJenkins() {
+		assertTrue(2+2 == 4);
+	}
 
 }

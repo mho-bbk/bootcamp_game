@@ -5,15 +5,22 @@ import org.junit.jupiter.api.Test;
 class CoordinateTest {
 
 	@Test
-	void test() {
+	void testRandomise() {
 		Coordinate coord = new Coordinate();
 		
-//		coord.randomise(3);
-//		System.out.println(coord.getRow());
-//		System.out.println(coord.getCol());
+		coord.randomise(3);
+		
+		assertTrue(coord.getRow() < 3);
+		System.out.println(coord.getRow());
+		
+		assertTrue(coord.getCol() >= 0);
+		System.out.println(coord.getCol());
 		
 		coord.randomise(20);
+		assertTrue(coord.getRow() < 20);
 		System.out.println(coord.getRow());
+		
+		assertTrue(coord.getCol() >= 0);
 		System.out.println(coord.getCol());
 	}
 	

@@ -33,9 +33,7 @@ public class Coordinate {
 	
 	public void randomise(int gridSize) {
 		int randoRow = random.nextInt(gridSize);
-//		System.out.println(randoRow);
 		int randoCol = random.nextInt(gridSize);
-//		System.out.println(randoCol);
 		
 		setRow(randoRow);
 		setCol(randoCol);
