@@ -5,25 +5,8 @@ import java.util.Scanner;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 public class Run {
-
-	JFrame window = new JFrame("Treasure Hunt");
-	final JTextField visual_input = new JTextField(2);
-	JButton enter = new JButton("Enter");
-	String answer;
 
 	Scanner inp = new Scanner(System.in);
 
@@ -58,7 +41,6 @@ public class Run {
 	        //TODO
 	        // GENERATE ENEMIES
 	        enemy = new Enemy("Gerard", gridSizeAsInt);
-//	        TODO - doesn't work anymore after Enemy refactored to resemble Treasure - newGrid.setPosition(enemy);
 //	        numOfEnemies = Integer.parseInt(userGridSize)*2; // E.G. grid size is 5x5 (= 25) so number of enemies = 10
 	        
 	        // ADD PLAYER
@@ -73,7 +55,8 @@ public class Run {
 	        // CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS TREASURE
 	        if(TREASURE.checkWin(p)) {
 	        	System.out.println(winMessage);
-	        	winGame(p.getName());
+	        	// Win Game message
+	        	//winGame(p.getName());
 	        	finished = true;
 	        } else if (enemy.checkWin(p)) {
 	        	// CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS ENEMY
@@ -83,7 +66,8 @@ public class Run {
 	        	System.out.println("The treasure is somewhere...");
 	        }
 	        
-	        init_window(newGrid, gridSizeAsInt);
+	        // Create GUI Screen
+	        // init_window(newGrid, gridSizeAsInt);
 	        
 	        // BEGIN PLAYER MOVES
 	        while(!finished) {
@@ -101,7 +85,8 @@ public class Run {
 		        
 		        newGrid.setPosition(p);
 		        // Initiate GUI
-		        init_window(newGrid, gridSizeAsInt);
+		        // init_window(newGrid, gridSizeAsInt);
+		        
 //		        newGrid.printGrid();
 		        
 		        //Don't check if just exiting
@@ -109,7 +94,8 @@ public class Run {
 		        	//Check treasure
 			        if(TREASURE.checkWin(p)) {
 			        	System.out.println(winMessage);
-			        	winGame(p.getName());
+			        	// Win Game Message
+			        	//winGame(p.getName());
 			        	finished = true;
 			        } else if (enemy.checkWin(p)) {
 			        	// CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS ENEMY
@@ -131,75 +117,6 @@ public class Run {
 
    }
 	
-	
-    public void winGame(String name) {
-        window.getContentPane().removeAll();
-        window.repaint();
-        JLabel win = new JLabel();
-        win.setText(name + " won. I love cheeseburgers.");
-        window.add(win);
-        window.pack();
-        window.setVisible(true);
-    }
-
-   // GUI Handler
-    public void init_window(GridController grid, int gridSize) {
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setLayout(new GridLayout(gridSize, gridSize));
-        window.setLocationRelativeTo(null);
-        window.getContentPane().removeAll();
-        window.repaint();
-        for (int i = 0; i < gridSize; i++) {
-            for (int j = 0; j < gridSize; j++) {
-                JLabel label = addEntity(grid.grid[i][j]);
-                window.add(label);
-            }
-        }
-        window.pack();
-        window.setVisible(true);
-    }
-
-
-    public void update(GridController grid, int gridSize) {
-        for (int i = 0; i < gridSize; i++) {
-            for (int j = 0; j < gridSize; j++) {
-                JLabel label = addEntity(grid.grid[i][j]);
-                window.add(label);
-            }
-        }
-        window.repaint();
-    }
-
-
-
-   public JLabel addEntity(char c) {
-        JLabel label = new JLabel();
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setPreferredSize(new Dimension(50, 50));
-        switch (c) {
-        case '•':
-            label.setBackground(Color.CYAN);
-            break;
-        case 'P':
-            label.setBackground(Color.black);
-        }
-        label.setOpaque(true);
-        label.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1));
-        return label;
-    }
-   
-	// input handler gui
-	private String getGUIInput(String s) {
-		enter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				answer = visual_input.getText();
-			}
-		});
-		
-		return this.answer;
-
-	}
-
 	// input handler console
 	private String getInput(String s) {
 		System.out.println(s);
