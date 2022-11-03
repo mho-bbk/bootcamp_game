@@ -55,7 +55,7 @@ public class Run {
 	        // CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS TREASURE
 	        if(TREASURE.checkWin(p)) {
 	        	System.out.println(winMessage);
-	        	// Win Game message
+	        	// GUI Win Game message
 	        	//winGame(p.getName());
 	        	finished = true;
 	        } else if (enemy.checkWin(p)) {
@@ -87,14 +87,15 @@ public class Run {
 		        // Initiate GUI
 		        // init_window(newGrid, gridSizeAsInt);
 		        
-//		        newGrid.printGrid();
+		        // Display grid in console
+		        newGrid.printGrid();
 		        
 		        //Don't check if just exiting
 		        if(!move.toUpperCase().equals("X")) {
 		        	//Check treasure
 			        if(TREASURE.checkWin(p)) {
 			        	System.out.println(winMessage);
-			        	// Win Game Message
+			        	// GUI Win Game Message
 			        	//winGame(p.getName());
 			        	finished = true;
 			        } else if (enemy.checkWin(p)) {
