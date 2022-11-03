@@ -19,6 +19,8 @@ public class Run {
     public Enemy enemy;
     ArrayList<String> enemies = new ArrayList<>();
     int numOfEnemies;
+    
+    GameEnder gameEnder;
    
 	final String winMessage = "You've won the game!";
 	final String loseMessage = "My G, you've bumped into a monster...and been eaten! Game over.";
@@ -87,16 +89,12 @@ public class Run {
 	        gui = new GUI(newGrid, gridSizeAsInt);
 	        
 	        // CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS TREASURE
-	        if(TREASURE.checkWin(p)) {
-	        	System.out.println(winMessage);
-	        	// Win Game message
-	        	//winGame(p.getName());
-	        	finished = true;
-	        } else if (enemy.checkWin(p)) {
-	        	// CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS ENEMY
-	        	System.out.println(loseMessage);
-	        	finished = true;
+	        finished = checkGameEnds(p, TREASURE, enemy);
+	        if(finished) {
+	        	//Player has spawned in same sq as treasure or enemy
+	        	runFinishSequence(p);
 	        } else {
+	        	//Game not finished
 	        	System.out.println("The treasure is somewhere...");
 	        }
 	        
@@ -125,10 +123,12 @@ public class Run {
 		        // Initiate GUI
 		        // init_window(newGrid, gridSizeAsInt);
 		        
-//		        newGrid.printGrid();
+		        // Display grid in console
+		        newGrid.printGrid();
 		        
 		        //Don't check if just exiting
 		        if(!move.toUpperCase().equals("X")) {
+<<<<<<< HEAD
 		        	//Check treasure
 			        if(TREASURE.checkWin(p)) {
 			        	System.out.println(winMessage);
@@ -141,7 +141,14 @@ public class Run {
 			        	gui.setLoseGame(true);
 			        	gui.update(debugGrid);
 			        	finished = true;
+=======
+		        	//Check if game ends
+		        	finished = checkGameEnds(p, TREASURE, enemy);
+			        if(finished) {
+			        	runFinishSequence(p);
+>>>>>>> b54faa94c6100341f609a145645af6f22fc1dc43
 			        } else {
+			        	//Game not finished; give clue towards treasure  
 			        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
 			        }
 			        
@@ -166,7 +173,36 @@ public class Run {
 
 	}
     
-
+    //TODO - make more extensible eg if more than one enemy/more than one treasure
+    public boolean checkGameEnds(Player p, Treasure t, Enemy e) {
+        if(t.checkWin(p)) {
+        	gameEnder = t;
+        	return true;
+        } else if (e.checkWin(p)) {
+        	gameEnder = e;
+        	return true;
+        } else {
+        	return false;
+        }
+    }
+    
+    /**
+     * Checks what has ended the game (treasure or enemy) then prints end msg to console.
+     * @param p personalises endMessage in GUI for player
+     */
+    private void runFinishSequence(Player p) {
+    	if(gameEnder!=null) {
+    		if(gameEnder instanceof Treasure) {
+	        	System.out.println(winMessage);
+//	        	gui.winGame(p.getName());
+    		} else {
+    			//gameEnder must be instanceof Enemy
+	        	System.out.println(loseMessage);
+    		}
+    	} else {
+    		System.out.println("Something's gone wrong. Tell dev: gameEnder is null");
+    	}
+    }
 
 
 }

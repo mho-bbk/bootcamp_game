@@ -1,7 +1,9 @@
 import java.util.Random;
 
-public class Treasure {
+public class Treasure implements GameEnder {
+	
 	private Coordinate pos = new Coordinate();
+	
 	private char symbol = 'T';
 
 	private int gold;
@@ -17,10 +19,12 @@ public class Treasure {
 		return this.gold;
 	}
 	
+	@Override
 	public Coordinate getPosition() {
 		return this.pos;
 	}
 	
+<<<<<<< HEAD
 	public boolean checkWin(Player p) {
 		return this.getPosition().equals(p.getCurrentPosition());
 	}
@@ -61,4 +65,6 @@ public class Treasure {
 	public void setSymbol(char symbol) {
 		this.symbol = symbol;
 	}
+=======
+>>>>>>> b54faa94c6100341f609a145645af6f22fc1dc43
 }
