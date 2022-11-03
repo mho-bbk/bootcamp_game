@@ -1,5 +1,4 @@
 
-
 public interface GameEnder {
 	
 	public Coordinate getPosition();
