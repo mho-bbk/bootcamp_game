@@ -24,38 +24,7 @@ public class Treasure implements GameEnder {
 		return this.pos;
 	}
 	
-<<<<<<< HEAD
-	public boolean checkWin(Player p) {
-		return this.getPosition().equals(p.getCurrentPosition());
-	}
-	
-	public String compareDistanceFromPrevious(Player p) {
 
-		double currentDistance = getDistanceFrom(p.getCurrentPosition());
-		double previousDistance = getDistanceFrom(p.getPreviousPosition());
-		
-		String res = "";
-		if (currentDistance > previousDistance) {
-			res = "Getting colder!";
-		} else if (currentDistance < previousDistance) {
-			res = "Getting warmer!";
-		} else {
-			//they are the same
-			res = "You are the same distance from the treasure :(";
-		}
-		
-		return res;
-	}
-	
-	private double getDistanceFrom(Coordinate c) {
-		int xDistance = getPosition().getCol() - c.getCol();
-		int yDistance = getPosition().getRow() - c.getRow();
-		
-		//Use Pythagorus
-		return Math.sqrt((xDistance * xDistance) + (yDistance * yDistance));
-		
-	}
-	
 	// NEW METHODS
 	
 	public char getSymbol() {
@@ -65,6 +34,5 @@ public class Treasure implements GameEnder {
 	public void setSymbol(char symbol) {
 		this.symbol = symbol;
 	}
-=======
->>>>>>> b54faa94c6100341f609a145645af6f22fc1dc43
+	
 }
