@@ -57,4 +57,15 @@ public class GridController {
 	    }
    }
 
+   // NEW METHODS
+   
+   public void setEnemyPosition(Enemy enemy) {
+	   grid[enemy.getPosition().getRow()][enemy.getPosition().getCol()] = enemy.getSymbol();
+   }
+   
+   public void setTreasurePosition(Treasure t) {
+	   grid[t.getPosition().getRow()][t.getPosition().getCol()] = t.getSymbol();
+   }
+   
+   
 }

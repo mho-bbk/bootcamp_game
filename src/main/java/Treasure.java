@@ -3,7 +3,7 @@ import java.util.Random;
 public class Treasure {
 	private Coordinate pos = new Coordinate();
 	private char symbol = 'T';
-	
+
 	private int gold;
 	
 	Random random = new Random();
@@ -50,5 +50,15 @@ public class Treasure {
 		//Use Pythagorus
 		return Math.sqrt((xDistance * xDistance) + (yDistance * yDistance));
 		
+	}
+	
+	// NEW METHODS
+	
+	public char getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(char symbol) {
+		this.symbol = symbol;
 	}
 }

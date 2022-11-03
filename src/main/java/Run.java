@@ -8,9 +8,15 @@ import java.util.Scanner;
 
 public class Run {
 
+	// NEW
+	GUI gui;
+	
+	/** DEBUG	**/
+	boolean debug=false;
+	
 	Scanner inp = new Scanner(System.in);
 
-    Enemy enemy;
+    public Enemy enemy;
     ArrayList<String> enemies = new ArrayList<>();
     int numOfEnemies;
    
@@ -19,6 +25,13 @@ public class Run {
 	
 
     public Run() {
+    	
+    	if(getInput("Would you like to run in debug mode? t/f: ").equalsIgnoreCase("t")) {
+    		debug=true;
+    		System.out.println("DEBUG MODE ENABLED");
+    	} else {
+    		System.out.println("GAME MODE");
+    	}
     	
     	boolean finished = false;
     	final Treasure TREASURE;
@@ -35,22 +48,43 @@ public class Run {
         if(gridSizeAsInt != 0) {
 	        // GENERATE GRID
 	        GridController newGrid = new GridController(gridSizeAsInt);
+	        
+	        /**	DEBUG	**/
+	        GridController debugGrid = new GridController(gridSizeAsInt);
+	        
 	        // GENERATE TREASURE
 	        TREASURE = new Treasure(gridSizeAsInt);
 	        
 	        //TODO
 	        // GENERATE ENEMIES
 	        enemy = new Enemy("Gerard", gridSizeAsInt);
+	        
 //	        numOfEnemies = Integer.parseInt(userGridSize)*2; // E.G. grid size is 5x5 (= 25) so number of enemies = 10
 	        
 	        // ADD PLAYER
 	        String playerName = getInput("What's your name?: ");
 	        Player p = new Player(playerName, gridSizeAsInt);
 	        newGrid.setPosition(p);
+
+	        /**	DEBUG	**/
+	        debugGrid.setEnemyPosition(enemy);
+	        debugGrid.setPosition(p);
+	        debugGrid.setTreasurePosition(TREASURE);
 	        
 	        System.out.println("Hello " + p.getName());
 	        System.out.println("Grid of size "+userGridSize+" x "+userGridSize+" created.");
-	        newGrid.printGrid();
+	        
+	        /**	TURN TRUE/FALSE FOR DEBUG	**/
+	        if(!debug) {
+	        	newGrid.printGrid();
+	        } else {
+		        debugGrid.printGrid();
+	        }
+	        
+
+	        
+	        // NEW
+	        gui = new GUI(newGrid, gridSizeAsInt);
 	        
 	        // CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS TREASURE
 	        if(TREASURE.checkWin(p)) {
@@ -84,6 +118,10 @@ public class Run {
 		        }
 		        
 		        newGrid.setPosition(p);
+		        
+		        // NEW
+		        gui.update(newGrid);
+		        
 		        // Initiate GUI
 		        // init_window(newGrid, gridSizeAsInt);
 		        
@@ -95,11 +133,13 @@ public class Run {
 			        if(TREASURE.checkWin(p)) {
 			        	System.out.println(winMessage);
 			        	// Win Game Message
-			        	//winGame(p.getName());
+			        	gui.winGame(p.getName());
 			        	finished = true;
 			        } else if (enemy.checkWin(p)) {
 			        	// CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS ENEMY
 			        	System.out.println(loseMessage);
+			        	gui.setLoseGame(true);
+			        	gui.update(debugGrid);
 			        	finished = true;
 			        } else {
 			        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
