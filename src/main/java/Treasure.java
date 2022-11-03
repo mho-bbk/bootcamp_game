@@ -26,7 +26,7 @@ public class Treasure implements GameEnder {
 	
 
 	// NEW METHODS
-	
+	@Override
 	public char getSymbol() {
 		return symbol;
 	}

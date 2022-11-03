@@ -8,7 +8,7 @@ public class Run {
 	// NEW
 	GUI gui;
 	
-	/** DEBUG	**/
+	/** DEBUG **/
 	boolean debug=false;
 	
 	Scanner inp = new Scanner(System.in);
@@ -66,9 +66,9 @@ public class Run {
 	        newGrid.setPosition(p);
 
 	        /**	DEBUG	**/
-	        debugGrid.setEnemyPosition(enemy);
+	        debugGrid.setPosition(enemy);
 	        debugGrid.setPosition(p);
-	        debugGrid.setTreasurePosition(TREASURE);
+	        debugGrid.setPosition(TREASURE);
 	        
 	        System.out.println("Hello " + p.getName());
 	        System.out.println("Grid of size "+userGridSize+" x "+userGridSize+" created.");
@@ -79,8 +79,6 @@ public class Run {
 	        } else {
 		        debugGrid.printGrid();
 	        }
-	        
-
 	        
 	        // NEW
 	        gui = new GUI(newGrid, gridSizeAsInt);
@@ -121,7 +119,7 @@ public class Run {
 		        // init_window(newGrid, gridSizeAsInt);
 		        
 		        // Display grid in console
-		        if(debug) {
+		        if(!debug) {
 		        	newGrid.printGrid();
 		        } else {
 		        	debugGrid.printGrid();

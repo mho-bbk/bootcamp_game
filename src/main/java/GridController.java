@@ -56,16 +56,8 @@ public class GridController {
 	        System.out.println();
 	    }
    }
-
-   // NEW METHODS
    
-   public void setEnemyPosition(Enemy enemy) {
-	   grid[enemy.getPosition().getRow()][enemy.getPosition().getCol()] = enemy.getSymbol();
+   public void setPosition(GameEnder gameEnder) {
+	   grid[gameEnder.getPosition().getRow()][gameEnder.getPosition().getCol()] = gameEnder.getSymbol();
    }
-   
-   public void setTreasurePosition(Treasure t) {
-	   grid[t.getPosition().getRow()][t.getPosition().getCol()] = t.getSymbol();
-   }
-   
-   
 }

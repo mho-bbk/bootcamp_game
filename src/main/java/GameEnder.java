@@ -2,6 +2,7 @@
 public interface GameEnder {
 	
 	public Coordinate getPosition();
+	public char getSymbol();
 	
 	public default boolean checkWin(Player p) {
 		return getPosition().equals(p.getCurrentPosition());
