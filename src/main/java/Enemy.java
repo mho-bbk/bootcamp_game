@@ -1,36 +1,13 @@
-import java.util.Random;
 
-public class Enemy {
-	private Coordinate pos = new Coordinate();
-	private String message;
-	private String name;
-	private char symbol = 'E';
+public class Enemy extends IsPersonalisable {
 	
-	Random random = new Random();
+	private Coordinate pos = new Coordinate();
 
 	public Enemy(String name, int gridSize) {
-		pos.randomise(gridSize);
 		setName(name);
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
-	public char getSymbol() {
-		   return this.symbol;
+		setSymbol('E');
+		
+		pos.randomise(gridSize);
 	}
 	
 	public Coordinate getPosition() {

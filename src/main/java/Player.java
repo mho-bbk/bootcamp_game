@@ -1,32 +1,17 @@
 
-public class Player {
-	private String name;
+public class Player extends IsPersonalisable {
+	
 	private Coordinate currentPos = new Coordinate();
     private Coordinate previousPos;
-	private char symbol = 'P';
 	int gridSize;
 	
 	public Player(String name, int gridSize) {
-		this.name = name;
+		setName(name);
+		setSymbol('P');
+		
 		currentPos.randomise(gridSize);
 		this.gridSize = gridSize;
 	}
-	
-   public String getName() {
-        return name;
-    }
-
-   public void setName(String name) {
-        this.name = name;
-    }
-   
-   public char getSymbol() {
-	   return this.symbol;
-   }
-   
-   public void setSymbol(char c) {
-	   this.symbol = c;
-   }
    
    public Coordinate getCurrentPosition() {
 	   return this.currentPos;
