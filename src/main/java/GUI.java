@@ -26,6 +26,7 @@ public class GUI {
 		window.setPreferredSize(new Dimension(800, 800));
 		window.setLayout(new GridLayout(gridSize, gridSize));
 		window.setLocationRelativeTo(null);
+		window.setAlwaysOnTop (true);
 		update(grid);
 	}
 
