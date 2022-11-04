@@ -44,11 +44,11 @@ public class GUI {
 		win.setVerticalAlignment(JLabel.CENTER);
 		
 		JLabel icon = new JLabel();
-		ImageIcon img = new ImageIcon("C:\\Users\\Rizwan\\Documents\\BootCamp\\final_game\\bootcamp_game\\src\\main\\resources\\burger.png");
+		ImageIcon img = new ImageIcon(getClass().getResource("burger.png"));
 		icon.setIcon(img);
 		
 		JLabel iconEz = new JLabel();
-		ImageIcon img2 = new ImageIcon("C:\\Users\\Rizwan\\Documents\\BootCamp\\final_game\\bootcamp_game\\src\\main\\resources\\2ez.jpg");
+		ImageIcon img2 = new ImageIcon(getClass().getResource("2ez.jpg"));
 		ImageIcon img2Scaled = new ImageIcon(img2.getImage().getScaledInstance(250, 195, Image.SCALE_DEFAULT));
 		iconEz.setIcon(img2Scaled);
 		
