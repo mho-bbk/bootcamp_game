@@ -135,7 +135,7 @@ public class Run {
 	
 	// input handler console
 	private String getInput(String s) {
-		System.out.println(s);
+		System.out.print(s);
 		// TODO - input validation
 		String ans = inp.next();
 		return ans;
