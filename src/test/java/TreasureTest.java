@@ -17,6 +17,8 @@ class TreasureTest {
 		Mockito.when(p.getPreviousPosition()).thenReturn(new Coordinate(1,1));
 		
 		Mockito.when(t.compareDistanceFromPrevious(p)).thenCallRealMethod();
+		Mockito.when(t.getDistanceFrom(p.getCurrentPosition())).thenCallRealMethod();
+		Mockito.when(t.getDistanceFrom(p.getPreviousPosition())).thenCallRealMethod();
 		
 		assertEquals("Getting colder!", t.compareDistanceFromPrevious(p));
 		
