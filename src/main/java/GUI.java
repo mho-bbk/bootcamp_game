@@ -35,7 +35,6 @@ public class GUI {
 	}
 
 	public void winGame(String name, int gold) {
-		System.out.println("IN METHOD");
 		window.getContentPane().removeAll();
 		window.repaint();
 		
