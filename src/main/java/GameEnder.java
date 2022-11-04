@@ -11,9 +11,7 @@ public interface GameEnder {
 	public default String compareDistanceFromPrevious(Player p) {
 
 		double currentDistance = getDistanceFrom(p.getCurrentPosition());
-		System.out.println("Current dist: " + currentDistance);
 		double previousDistance = getDistanceFrom(p.getPreviousPosition());
-		System.out.println("Previous dist: " + previousDistance);
 		
 		String res = "";
 		if (currentDistance > previousDistance) {
@@ -30,9 +28,7 @@ public interface GameEnder {
 	
 	public default double getDistanceFrom(Coordinate c) {
 		int xDistance = getPosition().getCol() - c.getCol();
-		System.out.println("xDistance: " + xDistance);
 		int yDistance = getPosition().getRow() - c.getRow();
-		System.out.println("yDistance: " + yDistance);
 		
 		//Use Pythagorus
 		return Math.sqrt((xDistance * xDistance) + (yDistance * yDistance));
