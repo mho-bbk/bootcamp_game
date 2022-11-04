@@ -30,11 +30,11 @@ public class GUI {
 		update(grid);
 	}
 
-	public void winGame(String name) {
+	public void winGame(String name, int gold) {
 		window.getContentPane().removeAll();
 		window.repaint();
 		JLabel win = new JLabel();
-		win.setText(name + " won. I love cheeseburgers.");
+		win.setText(name + " won. You have gained "+gold+" which can buy you " +gold/2+" cheeseburgers.");
 		win.setHorizontalAlignment(JLabel.CENTER);
 		win.setVerticalAlignment(JLabel.CENTER);
 		window.add(win);

@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Run {
 
-	// NEW
 	GUI gui;
 	
 	/** DEBUG	**/
@@ -51,16 +50,14 @@ public class Run {
 	        /**	DEBUG	**/
 	        GridController debugGrid = new GridController(gridSizeAsInt);
 	        
-	        // GENERATE TREASURE
+	        // GENERATE ENTITIES
 	        TREASURE = new Treasure(gridSizeAsInt);
-	        
-	        //TODO
-	        // GENERATE ENEMIES
 	        enemy = new Enemy("Gerard", gridSizeAsInt);
 	        
-//	        numOfEnemies = Integer.parseInt(userGridSize)*2; // E.G. grid size is 5x5 (= 25) so number of enemies = 10
+	        //TODO - Future features
+	        //numOfEnemies = Integer.parseInt(userGridSize)*2; // E.G. grid size is 5x5 (= 25) so number of enemies = 10
 	        
-	        // ADD PLAYER
+	        // ADD PLAYER TO GRID
 	        String playerName = getInput("What's your name?: ");
 	        Player p = new Player(playerName, gridSizeAsInt);
 	        newGrid.setPosition(p);
@@ -73,35 +70,28 @@ public class Run {
 	        System.out.println("Hello " + p.getName());
 	        System.out.println("Grid of size "+userGridSize+" x "+userGridSize+" created.");
 	        
-	        /**	TURN TRUE/FALSE FOR DEBUG	**/
+	        /**	TURN TRUE/FALSE FOR DEBUG MODE	**/
 	        if(!debug) {
 	        	newGrid.printGrid();
 	        } else {
 		        debugGrid.printGrid();
 	        }
 	        
-
-	        
-	        // NEW
+	        // CREATE GUI WINDOW
 	        gui = new GUI(newGrid, gridSizeAsInt);
 	        
 	        // CHECK PLAYER DOESN'T SPAWN IN SAME SQ AS TREASURE
 	        finished = checkGameEnds(p, TREASURE, enemy);
 	        if(finished) {
 	        	//Player has spawned in same sq as treasure or enemy
-	        	runFinishSequence(p, debugGrid);
+	        	runFinishSequence(p, debugGrid, TREASURE);
 	        } else {
 	        	//Game not finished
 	        	System.out.println("The treasure is somewhere...");
 	        }
 	        
-	        // Create GUI Screen
-	        // init_window(newGrid, gridSizeAsInt);
-	        
 	        // BEGIN PLAYER MOVES
 	        while(!finished) {
-	//	        System.out.println("Inside loop");
-		        
 	        	String move = getInput("Where do you want to go (U,D,L,R)? or press X to exit ");
 		        
 		        switch(move.toUpperCase()) {
@@ -112,42 +102,35 @@ public class Run {
 			        case "X": finished = true; break;
 		        }
 		        
+		        // UPDATE PLAYER POSITION ON GRID
 		        newGrid.setPosition(p);
-		        
-		        // NEW
+
+		        // RE-RENDER GUI
 		        gui.update(newGrid);
 		        
-		        // Initiate GUI
-		        // init_window(newGrid, gridSizeAsInt);
-		        
-		        // Display grid in console
+		        // GRID DISPLAY MODE
 		        if(debug) {
 		        	newGrid.printGrid();
 		        } else {
 		        	debugGrid.printGrid();
 		        }
 		        
-		        
 		        //Don't check if just exiting
 		        if(!move.toUpperCase().equals("X")) {
 		        	//Check if game ends
 		        	finished = checkGameEnds(p, TREASURE, enemy);
 			        if(finished) {
-			        	runFinishSequence(p, debugGrid);
+			        	runFinishSequence(p, debugGrid, TREASURE);
 			        } else {
 			        	//Game not finished; give clue towards treasure  
 			        	System.out.println(TREASURE.compareDistanceFromPrevious(p));
 			        }
 		        }
 	        }
-
 	        System.out.println(p.getName() + " has finished the game.");
-	     
         } else {
         	System.out.println("Remember your grid size has to be greater than 0 :(");
         }
-        
-
    }
 	
 	// input handler console
@@ -176,11 +159,11 @@ public class Run {
      * Checks what has ended the game (treasure or enemy) then prints end msg to console.
      * @param p personalises endMessage in GUI for player
      */
-    private void runFinishSequence(Player p, GridController debugGrid) {
+    private void runFinishSequence(Player p, GridController debugGrid, Treasure t) {
     	if(gameEnder!=null) {
     		if(gameEnder instanceof Treasure) {
 	        	System.out.println(winMessage);
-	        	gui.winGame(p.getName());
+	        	gui.winGame(p.getName(), t.getGold());
     		} else {
     			//gameEnder must be instanceof Enemy
     			gui.setLoseGame(true);
@@ -191,6 +174,4 @@ public class Run {
     		System.out.println("Something's gone wrong. Tell dev: gameEnder is null");
     	}
     }
-
-
 }
