@@ -109,7 +109,7 @@ public class Run {
 		        gui.update(newGrid);
 		        
 		        // Display grid in console
-		        if(!debug) {
+		        if(debug) {
 		        	newGrid.printGrid();
 		        } else {
 		        	debugGrid.printGrid();

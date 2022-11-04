@@ -1,10 +1,13 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,13 +34,19 @@ public class GUI {
 	}
 
 	public void winGame(String name, int gold) {
+		System.out.println("IN METHOD");
 		window.getContentPane().removeAll();
 		window.repaint();
 		JLabel win = new JLabel();
-		win.setText(name + " won. You have gained "+gold+" which can buy you " +gold/2+" cheeseburgers.");
-		win.setHorizontalAlignment(JLabel.CENTER);
-		win.setVerticalAlignment(JLabel.CENTER);
-		window.add(win);
+		JLabel icon = new JLabel();
+		ImageIcon img = new ImageIcon("C:\\Users\\Rizwan\\Documents\\BootCamp\\bootcamp_game\\src\\main\\img\\burger.png");
+		icon.setIcon(img);
+		//win.setText(name + " won. You have gained "+gold+" gold which can buy you " +gold/2+" cheeseburgers.");
+		//win.setHorizontalAlignment(JLabel.CENTER);
+		//win.setVerticalAlignment(JLabel.CENTER);
+		//window.setLayout(new FlowLayout());
+		window.add(icon);
+		//window.add(win);
 		window.pack();
 		window.setVisible(true);
 	}
